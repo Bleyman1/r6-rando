@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R6 Operator Randomizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #1a1a1a;
+            color: white;
+            padding: 30px;
+        }
+        button {
+            padding: 15px 25px;
+            margin: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #0078d7;
+            color: white;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+        img {
+            margin-top: 20px;
+            max-width: 300px;
+            border-radius: 10px;
+        }
+        .operator-name {
+            font-size: 28px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎮 Rainbow Six Siege Operator Randomizer</h1>
+    <button onclick="pick('attacker')">🎯 Angreifer</button>
+    <button onclick="pick('defender')">🛡️ Verteidiger</button>
+
+    <div id="result">
+        <p class="operator-name" id="name"></p>
+        <img id="image" src="" alt="" style="display:none;">
+    </div>
+
+    <script>
+        const attackers = ["Ash", "Sledge", "Thatcher", "Thermite", "Twitch", "Montagne", "Glaz", "Fuze", "Blitz", "IQ",
+            "Buck", "Blackbeard", "Capitão", "Hibana", "Jackal", "Ying", "Zofia", "Dokkaebi", "Lion", "Finka",
+            "Maverick", "Nomad", "Gridlock", "Nøkk", "Amaru", "Kali", "Iana", "Ace", "Zero", "Flores", "Osa",
+            "Sens", "Grim", "Brava", "Ram", "Deimos", "Striker", "Rauora"];
+
+        const defenders = ["Smoke", "Mute", "Castle", "Pulse", "Doc", "Rook", "Jäger", "Bandit", "Tachanka", "Kapkan",
+            "Frost", "Valkyrie", "Caveira", "Echo", "Mira", "Lesion", "Ela", "Vigil", "Maestro", "Alibi",
+            "Clash", "Kaid", "Mozzie", "Warden", "Goyo", "Wamai", "Oryx", "Melusi", "Aruni", "Thunderbird",
+            "Thorn", "Azami", "Solis", "Fenrir", "Tubarao", "Sentry", "Skopós"];
+
+        function formatName(name) {
+            return name.toLowerCase()
+                        .replace('ø', 'o')
+                        .replace('á', 'a')
+                        .replace('ó', 'o')
+                        .replace('ã', 'a')
+                        .replace('ç', 'c')
+                        .replace(/[^a-z0-9]/gi, '');
+        }
+
+        function pick(role) {
+            const list = role === 'attacker' ? attackers : defenders;
+            const operator = list[Math.floor(Math.random() * list.length)];
+            document.getElementById('name').innerText = operator;
+            const img = document.getElementById('image');
+            img.src = `images/operators/${formatName(operator)}.png`;
+            img.style.display = 'block';
+            img.alt = operator;
+        }
+    </script>
+</body>
+</html>
